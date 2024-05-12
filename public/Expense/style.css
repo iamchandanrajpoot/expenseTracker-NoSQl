@@ -1,0 +1,156 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header styles */
+header {
+  background-color: #191919;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header div:first-child {
+  font-size: 24px;
+}
+
+header div:last-child {
+  cursor: pointer;
+}
+
+header div:last-child:hover {
+  text-decoration: underline;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row; /* Default: horizontal layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+}
+
+#premium-div,
+#expense-form {
+  flex: 1; /* Each child takes equal space */
+  margin-right: 20px; /* Add some spacing between items */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  #wrapper {
+    flex-direction: column; /* Switch to vertical layout on smaller screens */
+  }
+
+  #premium-div,
+  #expense-form {
+    margin-right: 0; /* Remove margin to stack items vertically */
+  }
+}
+
+#premium-div {
+    margin-top: 20px;
+    margin-left: 20px;
+  /* Add styles for premium section if needed */
+}
+
+#expense-form {
+    margin-top: 20px;
+  width: 90%; /* Example max-width for the form */
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#expense-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#expense-form input[type="number"],
+#expense-form input[type="text"],
+#expense-form select {
+  width: 100%; /* Full width input fields */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#expense-form button[type="submit"] {
+  width: 100%; /* Full width button */
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#expense-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+hr {
+  margin-top: 50px;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/* Styles for the row per page section */
+#row-per-page-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#row-per-page-section label {
+  margin-right: 10px;
+}
+
+#row-per-page-section select {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+#pagination {
+  font-size: 14px;
+}
+
+/* -----------------footer------ */
+footer {
+  background-color: #191919;
+  color: #fff;
+  padding: 20px 0;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+footer .container p {
+  margin: 5px 0;
+}
+
+footer .container a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .container a:hover {
+  text-decoration: underline;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  footer .container {
+    padding: 0 10px;
+  }
+}

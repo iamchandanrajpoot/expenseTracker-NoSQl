@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>expense</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div>MyExpenseTackerApp</div>
+      <div id="logout">Logout</div>
+    </header>
+
+    <div id="wrapper">
+      <div id="premium-div">
+        
+      </div>
+
+      <form id="expense-form">
+        <label for="expendicture">Expendicture</label>
+        <input type="number" name="expendicture" id="expendicture" required />
+        <br /><br />
+        <label for="description">Description</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          required
+        /><br /><br />
+        <label for="category">Category</label>
+        <select name="category" id="category">
+          <option value="food">Food</option>
+          <option value="petrol">Petrol</option>
+          <option value="movie">Movie</option>
+          <option value="shopping">Shopping</option></select
+        ><br /><br />
+        <button type="submit">Add Expense</button>
+      </form>
+    </div>
+
+    <hr />
+    <div id="row-per-page-section">
+      <label for="perpage">Number of rows per page</label>
+      <select name="perpage" id="perpage">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <div id="pagination"></div>
+    </div>
+
+    <div>
+      <h1>Expenses</h1>
+      <ul id="expense-list"></ul>
+    </div>
+    <div id="leader-board" style="display: none"></div>
+
+    <!-- downloaded files -->
+    <div id="downloaded-files"></div>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </footer>
+    
+    <!-- script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="./expense.js"></script>
+    <script src="./logout.js"></script>
+  </body>
+</html>
