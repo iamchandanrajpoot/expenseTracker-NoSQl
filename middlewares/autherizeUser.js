@@ -1,21 +1,23 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+
 const autherizeUser = (req, res, next) => {
   try {
-    // console.log(req.headers)
     const token = req.headers["authorization"];
-    console.log(token);
     if (token) {
-      jwt.verify(token, process.env.JWT_SECRET_kEY, (err, user) => {
+      jwt.verify(token, process.env.JWT_SECRET_kEY, async (err, user) => {
         if (err) {
           console.log(err);
+          res.status(401).json({ message: "Unauthorized" });
         } else {
-          console.log(user);
-          req.user = user;
+          const dbUser = await User.findById(user.id);
+          req.user = dbUser;
           next();
         }
       });
     } else {
       console.log("token undefined");
+      res.status(401).json({ message: "Unauthorized" });
     }
   } catch (error) {
     console.log(error);

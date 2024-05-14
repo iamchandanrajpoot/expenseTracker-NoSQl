@@ -1,8 +1,9 @@
-const User = require("../models/userModel");
+const Expense = require("../models/expense");
 
-async function getExpensesOfUser(req){
-    const userInstance  = await User.findByPk(req.user.id);
-    return   userInstance.getExpenses();
+async function getExpensesOfUser(req) {
+  return await Expense.find({
+    user: req.user._id,
+  });
 }
 
 module.exports = getExpensesOfUser;
