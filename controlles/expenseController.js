@@ -13,7 +13,7 @@ exports.postExpense = async (req, res) => {
   try {
     session = await mongoose.startSession();
     session.startTransaction();
-    const user = await User.findById(req.user._id).session(session);
+
     const { expendicture, description, category } = req.body;
 
     const expense = new Expense({
@@ -25,8 +25,9 @@ exports.postExpense = async (req, res) => {
     await expense.save({ session });
 
     // update user total expense
-    user.totalExpense = parseInt(user.totalExpense) + parseInt(expendicture);
-    await user.save({ session });
+    req.user.totalExpense =
+      parseInt(user.totalExpense) + parseInt(expendicture);
+    await req.user.save({ session });
     await session.commitTransaction();
     session.endSession();
 

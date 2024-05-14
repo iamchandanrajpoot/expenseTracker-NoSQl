@@ -15,9 +15,9 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-const Oder = mongoose.model("Oder", orderSchema);
+const Oder = mongoose.model("Order", orderSchema);
 
-module.exports = Oder;
+module.exports = Order;
 
 // const { DataTypes } = require("sequelize");
 // const sequelize = require("../config/dbConfig");
