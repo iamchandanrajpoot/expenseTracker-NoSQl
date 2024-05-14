@@ -103,7 +103,8 @@ document.addEventListener("DOMContentLoaded", async function displayUserUi() {
                         }
                       );
 
-                      if (response.status === 201) {s
+                      if (response.status === 201) {
+                        s;
                         const data = await response.json();
                         var a = document.createElement("a");
                         console.log(data.fileUrl);
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async function displayUserUi() {
 });
 // -----------------------------------------------
 document.getElementById("perpage").value =
-  localStorage.getItem("perpage") || document.getElementById("perpage").value ;
+  localStorage.getItem("perpage") || document.getElementById("perpage").value;
 
 const perpageElement = document.getElementById("perpage");
 perpageElement.addEventListener("change", function handlePerpageChange(e) {
@@ -192,7 +193,7 @@ async function getExpenses(page) {
 
     expenses.forEach((expense) => {
       const li = document.createElement("li");
-      li.setAttribute("key", expense.id);
+      li.setAttribute("key", expense._id);
       li.innerHTML = `${expense.expendicture} - ${expense.description} - ${expense.category} <button class="delete">Delete Expense</button>`;
       expenseList.appendChild(li);
     });

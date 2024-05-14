@@ -2,10 +2,8 @@ const uuid = require("uuid");
 // // const sequelize = require("../config/dbConfig");
 const uploadToS3 = require("../utils/uploadFileToS3");
 const getExpensesOfUser = require("../utils/getExpenseOfUser");
-
 const mongoose = require("mongoose");
 const Expense = require("../models/expense");
-const User = require("../models/user");
 const DownloadFile = require("../models/downloadsFiles");
 
 exports.postExpense = async (req, res) => {
@@ -13,9 +11,7 @@ exports.postExpense = async (req, res) => {
   try {
     session = await mongoose.startSession();
     session.startTransaction();
-
     const { expendicture, description, category } = req.body;
-
     const expense = new Expense({
       expendicture,
       description,
@@ -23,7 +19,6 @@ exports.postExpense = async (req, res) => {
       userId: req.user._id,
     });
     await expense.save({ session });
-
     // update user total expense
     req.user.totalExpense =
       parseInt(req.user.totalExpense) + parseInt(expendicture);
@@ -53,13 +48,10 @@ exports.getExpenses = async (req, res) => {
       .skip(offset)
       .limit(perPage)
       .exec();
-
     // Count total expenses for the user without fetching all
     const totalCount = await Expense.countDocuments({ userId: req.user._id });
-
     // Calculate totalPages
     const totalPages = Math.ceil(totalCount / perPage);
-
     // Check if expenses exist
     if (expenses.length > 0) {
       res.status(200).json({ expenses, totalPages });
@@ -89,7 +81,7 @@ exports.getExpenseById = async (req, res) => {
 exports.deleteExpenseById = async (req, res) => {
   let session;
   try {
-    session = mongoose.startSession();
+    session = await mongoose.startSession();
     session.startTransaction();
     const expense = await Expense.findOneAndDelete(
       {
@@ -98,23 +90,21 @@ exports.deleteExpenseById = async (req, res) => {
       },
       { session }
     );
-
     const updatedExpense =
       parseInt(req.user.totalExpense) - parseInt(expense.expendicture);
-
     req.user.totalExpense = updatedExpense;
     await req.user.save({ session });
-
     // commit transaction
     await session.commitTransaction();
     session.endSession();
-
     res.status(200).json({ message: "Expense deleted successfully" });
   } catch (error) {
+    console.log(error);
     // rollback transaction
+
     await session.abortTransaction();
     session.endSession();
-    console.log(error);
+
     res.status(500).json({ message: "internal server error" });
   }
 };
