@@ -26,7 +26,7 @@ exports.postExpense = async (req, res) => {
 
     // update user total expense
     req.user.totalExpense =
-      parseInt(user.totalExpense) + parseInt(expendicture);
+      parseInt(req.user.totalExpense) + parseInt(expendicture);
     await req.user.save({ session });
     await session.commitTransaction();
     session.endSession();
